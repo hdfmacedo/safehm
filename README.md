@@ -2,8 +2,7 @@
 
 Sistema simples em PHP demonstrando cadastro e login.
 
-Agora é possível criar squads/comitês através do menu lateral, escolhendo um emoji para representá-los.
-Cada squad recebe uma pasta dentro de `data/squads/` onde ficam suas pautas em arquivos JSON.
+É possível criar squads/comitês através do menu lateral. Cada squad recebe uma pasta dentro de `data/squads/` onde ficam suas pautas em arquivos JSON.
 
 ## Como executar
 

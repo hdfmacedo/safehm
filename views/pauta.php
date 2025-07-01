@@ -12,7 +12,7 @@
         <div class="navbar">
             <a href="index.php">Home</a> /
             <a href="?squad=<?= urlencode($currentSquad['slug']) ?>">
-                <?= htmlspecialchars($currentSquad['emoji'] ?? '') ?> <?= htmlspecialchars($currentSquad['name']) ?>
+                <?= htmlspecialchars($currentSquad['name']) ?>
             </a>
             / <?= htmlspecialchars($pauta['name']) ?>
         </div>
@@ -22,8 +22,10 @@
             <input type="hidden" name="content" id="content-input">
             <div id="editor" style="height:300px;"><?= $pauta['content'] ?? '' ?></div>
             <input type="file" name="image" accept="image/*">
-            <button type="submit" name="return" value="0">Salvar</button>
-            <button type="submit" name="return" value="1">Salvar e voltar</button>
+            <div class="button-row">
+                <button type="submit" name="return" value="0">Salvar</button>
+                <button type="submit" name="return" value="1">Salvar e voltar</button>
+            </div>
         </form>
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
         <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>

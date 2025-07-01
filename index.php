@@ -10,7 +10,7 @@ $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] === 'add_squad' && isset($_SESSION['user'])) {
-        $squadController->addSquad($_POST['squad_name'] ?? '', $_POST['squad_emoji'] ?? '');
+        $squadController->addSquad($_POST['squad_name'] ?? '');
     } elseif (isset($_POST['action']) && $_POST['action'] === 'add_pauta' && isset($_SESSION['user'])) {
         $squadController->addPauta($_GET['squad'] ?? '', $_POST['pauta_name'] ?? '');
     } elseif (isset($_POST['action']) && $_POST['action'] === 'save_pauta' && isset($_SESSION['user'])) {

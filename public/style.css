@@ -20,6 +20,9 @@ input, button {
     border: none;
     border-radius: 4px;
 }
+a, a:visited {
+    color: #8ab4f8;
+}
 .menu {
     display: flex;
 }
@@ -31,7 +34,6 @@ input, button {
 }
 .menu-left a {
     display: block;
-    color: #fff;
     padding: 10px 0;
     text-decoration: none;
 }
@@ -66,7 +68,6 @@ input, button {
 }
 
 .navbar a {
-    color: #fff;
     text-decoration: none;
 }
 
@@ -91,4 +92,34 @@ input, button {
 
 .ql-editor {
     min-height: 200px;
+}
+
+.pauta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.pauta-table th,
+.pauta-table td {
+    border: 1px solid #333;
+    padding: 8px;
+}
+
+.add-pauta-form {
+    display: flex;
+    gap: 10px;
+}
+
+.add-pauta-form input {
+    flex: 1;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+}
+
+.button-row button {
+    width: 100%;
 }
