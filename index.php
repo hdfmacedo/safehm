@@ -10,7 +10,7 @@ $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] === 'add_squad' && isset($_SESSION['user'])) {
-        $squadController->addSquad($_POST['squad_name'] ?? '');
+        $squadController->addSquad($_POST['squad_name'] ?? '', $_POST['squad_emoji'] ?? '');
     } elseif (isset($_POST['action']) && $_POST['action'] === 'add_pauta' && isset($_SESSION['user'])) {
         $squadController->addPauta($_GET['squad'] ?? '', $_POST['pauta_name'] ?? '');
     } elseif (isset($_POST['action']) && $_POST['action'] === 'save_pauta' && isset($_SESSION['user'])) {
@@ -20,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['content'] ?? '',
             $_FILES['image'] ?? null
         );
+        if (!empty($_POST['return']) && $_POST['return'] === '1') {
+            header('Location: ?squad=' . urlencode($_GET['squad'] ?? ''));
+            exit;
+        }
     } else {
         $username = trim($_POST['username'] ?? '');
         $password = trim($_POST['password'] ?? '');
@@ -45,6 +49,7 @@ if (isset($_SESSION['user'])) {
     $squads = $squadController->getSquads();
     if (isset($_GET['pauta']) && isset($_GET['squad'])) {
         $pauta = $squadController->getPauta($_GET['squad'], $_GET['pauta']);
+        $currentSquad = Squad::getBySlug($_GET['squad']);
         include __DIR__ . '/views/pauta.php';
     } elseif (isset($_GET['squad'])) {
         $currentSquad = Squad::getBySlug($_GET['squad']);

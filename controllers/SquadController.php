@@ -3,8 +3,8 @@ require_once __DIR__ . '/../models/Squad.php';
 require_once __DIR__ . '/../models/Pauta.php';
 
 class SquadController {
-    public function addSquad(string $name): void {
-        Squad::add($name);
+    public function addSquad(string $name, string $emoji): void {
+        Squad::add($name, $emoji);
     }
 
     public function getSquads(): array {
