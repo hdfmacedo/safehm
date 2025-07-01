@@ -42,3 +42,18 @@ input, button {
     flex: 1;
     padding: 20px;
 }
+
+.squad-menu {
+    margin-top: 10px;
+}
+
+.squad-menu button {
+    width: auto;
+    margin-left: 5px;
+    padding: 5px 10px;
+}
+
+.submenu a {
+    padding-left: 20px;
+    font-size: 0.9em;
+}
