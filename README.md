@@ -2,7 +2,8 @@
 
 Sistema simples em PHP demonstrando cadastro e login.
 
-Agora é possível criar squads/comitês através do menu lateral.
+Agora é possível criar squads/comitês através do menu lateral. Cada squad recebe
+uma pasta dentro de `data/squads/` onde ficam suas pautas em arquivos JSON.
 
 ## Como executar
 
@@ -14,5 +15,7 @@ Agora é possível criar squads/comitês através do menu lateral.
 3. Acesse `http://localhost:8000` no navegador.
 
 As squads são salvas em `data/squads.json`.
+Cada pasta de squad contém as pautas em `data/squads/<slug>/`. Quando uma squad é
+criada, uma pauta inicial chamada "Pauta Principal" é gerada automaticamente.
 
 Todos os usuários são armazenados em arquivos JSON em `data/users/`. A pasta já existe no repositório, mas os arquivos de dados são ignorados pelo git.

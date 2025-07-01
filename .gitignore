@@ -1,2 +1,4 @@
 /data/users/*.json
 /data/squads.json
+/data/squads/*
+!/data/squads/.gitkeep

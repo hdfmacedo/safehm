@@ -18,7 +18,9 @@
             <?php if (!empty($squads)): ?>
             <div class="submenu">
                 <?php foreach ($squads as $squad): ?>
-                    <a href="#"><?= htmlspecialchars($squad) ?></a>
+                    <a href="?squad=<?= urlencode($squad['slug']) ?>">
+                        <?= htmlspecialchars($squad['name']) ?>
+                    </a>
                 <?php endforeach; ?>
             </div>
             <?php endif; ?>
