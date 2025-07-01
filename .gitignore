@@ -2,3 +2,4 @@
 /data/squads.json
 /data/squads/*
 !/data/squads/.gitkeep
+data/comment_statuses.json
