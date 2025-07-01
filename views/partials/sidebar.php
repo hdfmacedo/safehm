@@ -22,6 +22,7 @@
         <span>Configurações</span>
         <div class="submenu">
             <a href="?config=statuses">Status de comentários</a>
+            <a href="?config=pauta_statuses">Status de pautas</a>
         </div>
     </div>
     <a href="?logout=1">Sair</a>

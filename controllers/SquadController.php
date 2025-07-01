@@ -35,6 +35,10 @@ class SquadController {
         Pauta::updateCommentStatus($slug, $file, $index, $status);
     }
 
+    public function updatePautaStatus(string $slug, string $file, string $status): void {
+        Pauta::updateStatus($slug, $file, $status);
+    }
+
     public function removePauta(string $slug, string $file): void {
         Pauta::remove($slug, $file);
     }

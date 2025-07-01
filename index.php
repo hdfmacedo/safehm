@@ -5,11 +5,15 @@ require_once __DIR__ . '/models/User.php';
 require_once __DIR__ . '/controllers/SquadController.php';
 require_once __DIR__ . '/controllers/CommentStatusController.php';
 require_once __DIR__ . '/models/CommentStatus.php';
+require_once __DIR__ . '/controllers/PautaStatusController.php';
+require_once __DIR__ . '/models/PautaStatus.php';
 
 $controller = new UserController();
 $squadController = new SquadController();
 $statusController = new CommentStatusController();
+$pautaStatusController = new PautaStatusController();
 $statuses = CommentStatus::getAll();
+$pautaStatuses = PautaStatus::getAll();
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,6 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ?squad=' . urlencode($_GET['squad'] ?? ''));
             exit;
         }
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'update_pauta_status' && isset($_SESSION['user'])) {
+        $squadController->updatePautaStatus(
+            $_GET['squad'] ?? '',
+            $_GET['pauta'] ?? '',
+            $_POST['new_status'] ?? ''
+        );
+        $pauta = $squadController->getPauta($_GET['squad'], $_GET['pauta']);
     } elseif (isset($_POST['action']) && $_POST['action'] === 'add_status' && isset($_SESSION['user'])) {
         $statusController->addStatus($_POST['status'] ?? '', $_POST['color'] ?? '#ffffff');
         $statuses = $statusController->getStatuses();
@@ -40,6 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['action']) && $_POST['action'] === 'remove_status' && isset($_SESSION['user'])) {
         $statusController->removeStatus($_POST['status'] ?? '');
         $statuses = $statusController->getStatuses();
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'add_pauta_status' && isset($_SESSION['user'])) {
+        $pautaStatusController->addStatus($_POST['status'] ?? '', $_POST['color'] ?? '#ffffff');
+        $pautaStatuses = $pautaStatusController->getStatuses();
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'update_pauta_status_cfg' && isset($_SESSION['user'])) {
+        $pautaStatusController->updateStatus($_POST['status'] ?? '', $_POST['color'] ?? '#ffffff');
+        $pautaStatuses = $pautaStatusController->getStatuses();
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'remove_pauta_status' && isset($_SESSION['user'])) {
+        $pautaStatusController->removeStatus($_POST['status'] ?? '');
+        $pautaStatuses = $pautaStatusController->getStatuses();
     } elseif (isset($_POST['action']) && $_POST['action'] === 'add_comment' && isset($_SESSION['user'])) {
         $squadController->addComment(
             $_GET['squad'] ?? '',
@@ -84,9 +104,16 @@ if (isset($_SESSION['user'])) {
     foreach ($statuses as $s) {
         $statusMap[$s['name']] = $s['color'];
     }
+    $pautaStatusMap = [];
+    foreach ($pautaStatuses as $p) {
+        $pautaStatusMap[$p['name']] = $p['color'];
+    }
     if (isset($_GET['config']) && $_GET['config'] === 'statuses') {
         $statuses = $statusController->getStatuses();
         include __DIR__ . '/views/statuses.php';
+    } elseif (isset($_GET['config']) && $_GET['config'] === 'pauta_statuses') {
+        $pautaStatuses = $pautaStatusController->getStatuses();
+        include __DIR__ . '/views/pauta_statuses.php';
     } elseif (isset($_GET['pauta']) && isset($_GET['squad'])) {
         $pauta = $squadController->getPauta($_GET['squad'], $_GET['pauta']);
         $currentSquad = Squad::getBySlug($_GET['squad']);
