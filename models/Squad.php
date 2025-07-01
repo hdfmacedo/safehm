@@ -25,9 +25,8 @@ class Squad {
         return is_array($data) ? $data : [];
     }
 
-    public static function add(string $name, string $emoji): void {
+    public static function add(string $name): void {
         $name = trim($name);
-        $emoji = trim($emoji);
         if ($name === '') {
             return;
         }
@@ -47,7 +46,7 @@ class Squad {
 
         Pauta::create($slug, 'Pauta Principal', '');
 
-        $squads[] = ['name' => $name, 'slug' => $slug, 'emoji' => $emoji];
+        $squads[] = ['name' => $name, 'slug' => $slug];
 
         if (!is_dir(dirname(self::DATA_FILE))) {
             mkdir(dirname(self::DATA_FILE), 0777, true);
