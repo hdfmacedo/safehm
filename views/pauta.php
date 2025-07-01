@@ -21,11 +21,38 @@
             <input type="hidden" name="action" value="save_pauta">
             <input type="hidden" name="content" id="content-input">
             <div id="editor" style="height:300px;"><?= $pauta['content'] ?? '' ?></div>
-            <input type="file" name="image" accept="image/*">
             <div class="button-row">
                 <button type="submit" name="return" value="0">Salvar</button>
                 <button type="submit" name="return" value="1">Salvar e voltar</button>
             </div>
+        </form>
+        <h2>Comentários</h2>
+        <ul class="comment-list">
+            <?php foreach (($pauta['comments'] ?? []) as $idx => $c): ?>
+                <li>
+                    <strong><?= htmlspecialchars($c['user']) ?>:</strong>
+                    <?= nl2br(htmlspecialchars($c['text'])) ?>
+                    <form method="post" class="status-form" style="display:inline;">
+                        <input type="hidden" name="action" value="update_comment_status">
+                        <input type="hidden" name="comment_index" value="<?= $idx ?>">
+                        <select name="new_status" onchange="this.form.submit()">
+                            <?php foreach ($statuses as $st): ?>
+                                <option value="<?= htmlspecialchars($st) ?>" <?= $c['status'] === $st ? 'selected' : '' ?>><?= htmlspecialchars($st) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </form>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <form method="post" class="add-comment-form">
+            <input type="hidden" name="action" value="add_comment">
+            <textarea name="comment_text" placeholder="Seu comentário" required></textarea>
+            <select name="comment_status">
+                <?php foreach ($statuses as $st): ?>
+                    <option value="<?= htmlspecialchars($st) ?>"><?= htmlspecialchars($st) ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit">Comentar</button>
         </form>
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
         <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
