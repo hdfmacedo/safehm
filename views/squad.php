@@ -7,25 +7,10 @@
 </head>
 <body>
 <div class="menu">
-    <div class="menu-left">
-        <h2>Menu</h2>
-        <a href="index.php">Início</a>
-        <div class="squad-menu">
-            <span>Squads/Comitês</span>
-            <?php if (!empty($squads)): ?>
-            <div class="submenu">
-                <?php foreach ($squads as $s): ?>
-                    <a href="?squad=<?= urlencode($s['slug']) ?>">
-                        <?= htmlspecialchars($s['name']) ?>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-            <?php endif; ?>
-        </div>
-        <a href="?logout=1">Sair</a>
-    </div>
+    <?php include __DIR__ . '/partials/sidebar.php'; ?>
     <div class="content">
-        <h1><?= htmlspecialchars($currentSquad['name']) ?></h1>
+        <div class="navbar"><a href="index.php">Home</a> / <?= htmlspecialchars($currentSquad['emoji'] ?? '') ?> <?= htmlspecialchars($currentSquad['name']) ?></div>
+        <h1><?= htmlspecialchars($currentSquad['emoji'] ?? '') ?> <?= htmlspecialchars($currentSquad['name']) ?></h1>
         <form method="post">
             <input type="hidden" name="action" value="add_pauta">
             <input type="text" name="pauta_name" placeholder="Nova pauta" required>
