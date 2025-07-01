@@ -14,7 +14,7 @@
         <h2>Pautas</h2>
         <table class="pauta-table">
             <thead>
-                <tr><th>Nome</th><th>Criado em</th><th>Atualizado em</th></tr>
+                <tr><th>Nome</th><th>Criado em</th><th>Atualizado em</th><th>Ação</th></tr>
             </thead>
             <tbody>
             <?php foreach ($pautas as $p): ?>
@@ -22,6 +22,13 @@
                     <td><a href="?squad=<?= urlencode($currentSquad['slug']) ?>&pauta=<?= urlencode($p['file']) ?>"><?= htmlspecialchars($p['name']) ?></a></td>
                     <td><?= htmlspecialchars($p['created_at']) ?></td>
                     <td><?= htmlspecialchars($p['updated_at']) ?></td>
+                    <td>
+                        <form method="post" onsubmit="return confirm('Remover pauta?');">
+                            <input type="hidden" name="action" value="remove_pauta">
+                            <input type="hidden" name="pauta_file" value="<?= htmlspecialchars($p['file']) ?>">
+                            <button type="submit">Remover</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

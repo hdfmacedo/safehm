@@ -102,6 +102,13 @@ class Pauta {
             file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
         }
     }
+
+    public static function remove(string $squadSlug, string $file): void {
+        $path = self::BASE_DIR . "/$squadSlug/$file";
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
 }
 ?>
 
