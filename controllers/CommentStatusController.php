@@ -6,8 +6,12 @@ class CommentStatusController {
         return CommentStatus::getAll();
     }
 
-    public function addStatus(string $status): void {
-        CommentStatus::add($status);
+    public function addStatus(string $status, string $color): void {
+        CommentStatus::add($status, $color);
+    }
+
+    public function updateStatus(string $status, string $color): void {
+        CommentStatus::updateColor($status, $color);
     }
 
     public function removeStatus(string $status): void {

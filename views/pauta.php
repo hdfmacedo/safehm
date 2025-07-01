@@ -32,12 +32,16 @@
                 <li>
                     <strong><?= htmlspecialchars($c['user']) ?>:</strong>
                     <?= nl2br(htmlspecialchars($c['text'])) ?>
+                    <em>(<?= htmlspecialchars($c['created_at']) ?>)</em>
+                    <span style="color: <?= htmlspecialchars($statusMap[$c['status']] ?? '#fff') ?>; font-weight:bold;">
+                        <?= htmlspecialchars($c['status']) ?>
+                    </span>
                     <form method="post" class="status-form" style="display:inline;">
                         <input type="hidden" name="action" value="update_comment_status">
                         <input type="hidden" name="comment_index" value="<?= $idx ?>">
                         <select name="new_status" onchange="this.form.submit()">
                             <?php foreach ($statuses as $st): ?>
-                                <option value="<?= htmlspecialchars($st) ?>" <?= $c['status'] === $st ? 'selected' : '' ?>><?= htmlspecialchars($st) ?></option>
+                                <option value="<?= htmlspecialchars($st['name']) ?>" style="color: <?= htmlspecialchars($st['color']) ?>;" <?= $c['status'] === $st['name'] ? 'selected' : '' ?>><?= htmlspecialchars($st['name']) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </form>
@@ -49,7 +53,9 @@
             <textarea name="comment_text" placeholder="Seu comentário" required></textarea>
             <select name="comment_status">
                 <?php foreach ($statuses as $st): ?>
-                    <option value="<?= htmlspecialchars($st) ?>"><?= htmlspecialchars($st) ?></option>
+                    <option value="<?= htmlspecialchars($st['name']) ?>" style="color: <?= htmlspecialchars($st['color']) ?>;">
+                        <?= htmlspecialchars($st['name']) ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
             <button type="submit">Comentar</button>

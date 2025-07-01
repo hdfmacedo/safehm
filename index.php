@@ -29,7 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'add_status' && isset($_SESSION['user'])) {
-        $statusController->addStatus($_POST['status'] ?? '');
+        $statusController->addStatus($_POST['status'] ?? '', $_POST['color'] ?? '#ffffff');
+        $statuses = $statusController->getStatuses();
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'update_status' && isset($_SESSION['user'])) {
+        $statusController->updateStatus($_POST['status'] ?? '', $_POST['color'] ?? '#ffffff');
         $statuses = $statusController->getStatuses();
     } elseif (isset($_POST['action']) && $_POST['action'] === 'remove_status' && isset($_SESSION['user'])) {
         $statusController->removeStatus($_POST['status'] ?? '');
@@ -74,6 +77,10 @@ if (isset($_GET['logout'])) {
 
 if (isset($_SESSION['user'])) {
     $squads = $squadController->getSquads();
+    $statusMap = [];
+    foreach ($statuses as $s) {
+        $statusMap[$s['name']] = $s['color'];
+    }
     if (isset($_GET['config']) && $_GET['config'] === 'statuses') {
         $statuses = $statusController->getStatuses();
         include __DIR__ . '/views/statuses.php';
