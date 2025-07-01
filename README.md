@@ -22,3 +22,5 @@ As pautas são editadas com o [Quill](https://quilljs.com/), um editor rich text
 Todos os usuários são armazenados em arquivos JSON em `data/users/`. A pasta já existe no repositório, mas os arquivos de dados são ignorados pelo git.
 
 O sistema também permite adicionar comentários em cada pauta. Os comentários possuem um status que pode ser configurado em "Configurações > Status de comentários". Cada status possui uma cor RGB para facilitar a visualização. Por padrão já existem três status: Aberto, Em Andamento e Resolvido. Nos comentários é exibida a data e hora de criação junto do status colorido.
+
+As pautas também contam com um status próprio configurável em "Configurações > Status de pautas". As opções iniciais são as mesmas: Aberto, Em Andamento e Resolvido. Pautas existentes sem status são tratadas como "Aberto" e novas pautas já iniciam com esse valor.

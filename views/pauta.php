@@ -17,6 +17,17 @@
             / <?= htmlspecialchars($pauta['name']) ?>
         </div>
         <h1><?= htmlspecialchars($pauta['name']) ?></h1>
+            <div style="margin-bottom:10px;">
+                <form method="post" id="pauta-status-form">
+                    <input type="hidden" name="action" value="update_pauta_status">
+                    <select name="new_status" onchange="document.getElementById('pauta-status-form').submit()">
+                        <?php foreach ($pautaStatuses as $st): ?>
+                            <option value="<?= htmlspecialchars($st['name']) ?>" style="color: <?= htmlspecialchars($st['color']) ?>;" <?= ($pauta['status'] ?? 'Aberto') === $st['name'] ? 'selected' : '' ?>><?= htmlspecialchars($st['name']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
+            </div>
+
         <form method="post" enctype="multipart/form-data" id="pauta-form">
             <input type="hidden" name="action" value="save_pauta">
             <input type="hidden" name="content" id="content-input">

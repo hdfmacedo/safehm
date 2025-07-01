@@ -14,12 +14,15 @@
         <h2>Pautas</h2>
         <table class="pauta-table">
             <thead>
-                <tr><th>Nome</th><th>Criado em</th><th>Atualizado em</th><th>Ação</th></tr>
+                <tr><th>Nome</th><th>Status</th><th>Criado em</th><th>Atualizado em</th><th>Ação</th></tr>
             </thead>
             <tbody>
             <?php foreach ($pautas as $p): ?>
                 <tr>
                     <td><a href="?squad=<?= urlencode($currentSquad['slug']) ?>&pauta=<?= urlencode($p['file']) ?>"><?= htmlspecialchars($p['name']) ?></a></td>
+                    <td style="color: <?= htmlspecialchars($pautaStatusMap[$p['status']] ?? '#fff') ?>; font-weight:bold;">
+                        <?= htmlspecialchars($p['status']) ?>
+                    </td>
                     <td><?= htmlspecialchars($p['created_at']) ?></td>
                     <td><?= htmlspecialchars($p['updated_at']) ?></td>
                     <td>

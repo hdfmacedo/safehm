@@ -1,6 +1,7 @@
 <?php
 class Pauta {
     private const BASE_DIR = __DIR__ . '/../data/squads';
+    private const DEFAULT_STATUS = 'Aberto';
 
     private static function slugify(string $name): string {
         $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $name));
@@ -18,6 +19,7 @@ class Pauta {
         $data = [
             'name' => $name,
             'content' => $content,
+            'status' => self::DEFAULT_STATUS,
             'created_at' => $date,
             'updated_at' => $date
         ];
@@ -38,6 +40,9 @@ class Pauta {
                 continue;
             }
             $data['file'] = basename($path);
+            if (!isset($data['status'])) {
+                $data['status'] = self::DEFAULT_STATUS;
+            }
             $pautas[] = $data;
         }
         return $pautas;
@@ -49,6 +54,9 @@ class Pauta {
             return null;
         }
         $data = json_decode(file_get_contents($path), true);
+        if ($data && !isset($data['status'])) {
+            $data['status'] = self::DEFAULT_STATUS;
+        }
         return $data ?: null;
     }
 
@@ -101,6 +109,16 @@ class Pauta {
             $data['comments'][$index]['status'] = $status;
             file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
         }
+    }
+
+    public static function updateStatus(string $squadSlug, string $file, string $status): void {
+        $path = self::BASE_DIR . "/$squadSlug/$file";
+        if (!file_exists($path)) {
+            return;
+        }
+        $data = json_decode(file_get_contents($path), true) ?: [];
+        $data['status'] = $status;
+        file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
     }
 
     public static function remove(string $squadSlug, string $file): void {
