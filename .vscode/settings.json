@@ -1,0 +1,7 @@
+{
+  // Garante UTF-8 na leitura/escrita
+  "files.encoding": "utf8",
+
+  // Impede que o VS Code tente adivinhar outro encoding
+  "files.autoGuessEncoding": false
+}
