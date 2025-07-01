@@ -75,6 +75,33 @@ class Pauta {
         $data['updated_at'] = date('Y-m-d');
         file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
     }
+
+    public static function addComment(string $squadSlug, string $file, string $user, string $text, string $status): void {
+        $path = self::BASE_DIR . "/$squadSlug/$file";
+        if (!file_exists($path)) {
+            return;
+        }
+        $data = json_decode(file_get_contents($path), true) ?: [];
+        $data['comments'][] = [
+            'user' => $user,
+            'text' => $text,
+            'status' => $status,
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
+    public static function updateCommentStatus(string $squadSlug, string $file, int $index, string $status): void {
+        $path = self::BASE_DIR . "/$squadSlug/$file";
+        if (!file_exists($path)) {
+            return;
+        }
+        $data = json_decode(file_get_contents($path), true) ?: [];
+        if (isset($data['comments'][$index])) {
+            $data['comments'][$index]['status'] = $status;
+            file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
+        }
+    }
 }
 ?>
 

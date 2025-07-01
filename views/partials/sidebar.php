@@ -18,6 +18,12 @@
             <input type="hidden" name="squad_name" id="squad-name-input">
         </form>
     </div>
+    <div class="config-menu">
+        <span>Configurações</span>
+        <div class="submenu">
+            <a href="?config=statuses">Status de comentários</a>
+        </div>
+    </div>
     <a href="?logout=1">Sair</a>
 </div>
 <script>

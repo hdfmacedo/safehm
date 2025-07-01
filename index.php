@@ -3,9 +3,13 @@ session_start();
 require_once __DIR__ . '/controllers/UserController.php';
 require_once __DIR__ . '/models/User.php';
 require_once __DIR__ . '/controllers/SquadController.php';
+require_once __DIR__ . '/controllers/CommentStatusController.php';
+require_once __DIR__ . '/models/CommentStatus.php';
 
 $controller = new UserController();
 $squadController = new SquadController();
+$statusController = new CommentStatusController();
+$statuses = CommentStatus::getAll();
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,6 +28,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ?squad=' . urlencode($_GET['squad'] ?? ''));
             exit;
         }
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'add_status' && isset($_SESSION['user'])) {
+        $statusController->addStatus($_POST['status'] ?? '');
+        $statuses = $statusController->getStatuses();
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'remove_status' && isset($_SESSION['user'])) {
+        $statusController->removeStatus($_POST['status'] ?? '');
+        $statuses = $statusController->getStatuses();
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'add_comment' && isset($_SESSION['user'])) {
+        $squadController->addComment(
+            $_GET['squad'] ?? '',
+            $_GET['pauta'] ?? '',
+            $_SESSION['user'],
+            $_POST['comment_text'] ?? '',
+            $_POST['comment_status'] ?? ''
+        );
+        $pauta = $squadController->getPauta($_GET['squad'], $_GET['pauta']);
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'update_comment_status' && isset($_SESSION['user'])) {
+        $squadController->updateCommentStatus(
+            $_GET['squad'] ?? '',
+            $_GET['pauta'] ?? '',
+            intval($_POST['comment_index'] ?? 0),
+            $_POST['new_status'] ?? ''
+        );
+        $pauta = $squadController->getPauta($_GET['squad'], $_GET['pauta']);
     } else {
         $username = trim($_POST['username'] ?? '');
         $password = trim($_POST['password'] ?? '');
@@ -47,7 +74,10 @@ if (isset($_GET['logout'])) {
 
 if (isset($_SESSION['user'])) {
     $squads = $squadController->getSquads();
-    if (isset($_GET['pauta']) && isset($_GET['squad'])) {
+    if (isset($_GET['config']) && $_GET['config'] === 'statuses') {
+        $statuses = $statusController->getStatuses();
+        include __DIR__ . '/views/statuses.php';
+    } elseif (isset($_GET['pauta']) && isset($_GET['squad'])) {
         $pauta = $squadController->getPauta($_GET['squad'], $_GET['pauta']);
         $currentSquad = Squad::getBySlug($_GET['squad']);
         include __DIR__ . '/views/pauta.php';

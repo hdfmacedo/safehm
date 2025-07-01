@@ -26,5 +26,13 @@ class SquadController {
     public function addPauta(string $slug, string $name): void {
         Pauta::create($slug, $name, '');
     }
+
+    public function addComment(string $slug, string $file, string $user, string $text, string $status): void {
+        Pauta::addComment($slug, $file, $user, $text, $status);
+    }
+
+    public function updateCommentStatus(string $slug, string $file, int $index, string $status): void {
+        Pauta::updateCommentStatus($slug, $file, $index, $status);
+    }
 }
 ?>
