@@ -29,7 +29,7 @@
         <form method="post" class="add-pauta-form">
             <input type="hidden" name="action" value="add_pauta">
             <input type="text" name="pauta_name" placeholder="Nova pauta" required>
-            <button type="submit">Criar Pauta</button>
+            <button type="submit" style="width: 50%;">Criar Pauta</button>
         </form>
     </div>
 </div>
