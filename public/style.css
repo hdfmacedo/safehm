@@ -73,3 +73,22 @@ input, button {
 .navbar a:hover {
     text-decoration: underline;
 }
+
+/* Quill custom dark theme */
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow {
+    border: 1px solid #333;
+}
+
+.ql-toolbar.ql-snow {
+    background-color: #1e1e1e;
+}
+
+.ql-container.ql-snow {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.ql-editor {
+    min-height: 200px;
+}

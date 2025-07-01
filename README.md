@@ -17,6 +17,6 @@ Cada squad recebe uma pasta dentro de `data/squads/` onde ficam suas pautas em a
 As squads são salvas em `data/squads.json`.
 Cada pasta de squad contém as pautas em `data/squads/<slug>/`. Quando uma squad é
 criada, uma pauta inicial chamada "Pauta Principal" é gerada automaticamente.
-As pautas são editadas com um editor Markdown que exibe números de linha, e é possível apenas salvar ou salvar e voltar para a página da squad.
+As pautas são editadas com o [Quill](https://quilljs.com/), um editor rich text em modo escuro. É possível apenas salvar ou salvar e voltar para a página da squad.
 
 Todos os usuários são armazenados em arquivos JSON em `data/users/`. A pasta já existe no repositório, mas os arquivos de dados são ignorados pelo git.
