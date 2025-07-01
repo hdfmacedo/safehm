@@ -10,3 +10,4 @@
 * **Tamanho dos Métodos**: Funções curtas, de responsabilidade única; evite métodos extensos.
 * **Separação de Camadas**: Parte visual totalmente isolada da lógica de negócio (ex.: MVC).
 * **Arquitetura Geral**: Toda ação realizada no sistema pode recarregar a tela, para não precisar complicar o código com uso de React/Ajax, etc.
+* **Documentação**: Sempre atualize o README.md para explicar as funcionalidades do sistema.
