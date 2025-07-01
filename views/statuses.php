@@ -14,11 +14,18 @@
         <ul class="status-list">
             <?php foreach ($statuses as $st): ?>
                 <li>
-                    <?= htmlspecialchars($st) ?>
+                    <span style="color: <?= htmlspecialchars($st['color']) ?>; font-weight:bold;">
+                        <?= htmlspecialchars($st['name']) ?>
+                    </span>
                     <form method="post" style="display:inline;">
                         <input type="hidden" name="action" value="remove_status">
-                        <input type="hidden" name="status" value="<?= htmlspecialchars($st) ?>">
+                        <input type="hidden" name="status" value="<?= htmlspecialchars($st['name']) ?>">
                         <button type="submit">Remover</button>
+                    </form>
+                    <form method="post" style="display:inline; margin-left:5px;">
+                        <input type="hidden" name="action" value="update_status">
+                        <input type="hidden" name="status" value="<?= htmlspecialchars($st['name']) ?>">
+                        <input type="color" name="color" value="<?= htmlspecialchars($st['color']) ?>" onchange="this.form.submit()">
                     </form>
                 </li>
             <?php endforeach; ?>
@@ -26,6 +33,7 @@
         <form method="post" class="add-status-form">
             <input type="hidden" name="action" value="add_status">
             <input type="text" name="status" placeholder="Novo status" required>
+            <input type="color" name="color" value="#ffffff">
             <button type="submit">Adicionar</button>
         </form>
     </div>
