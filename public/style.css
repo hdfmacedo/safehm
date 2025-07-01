@@ -106,6 +106,19 @@ a, a:visited {
     padding: 8px;
 }
 
+.pauta-table th {
+    background-color: #1e1e1e;
+    color: #8ab4f8;
+}
+
+.pauta-table tr:nth-child(even) {
+    background-color: #1a1a1a;
+}
+
+.pauta-table tr:hover {
+    background-color: #2a2a2a;
+}
+
 .add-pauta-form {
     display: flex;
     gap: 10px;
@@ -127,6 +140,26 @@ a, a:visited {
 .comment-list { list-style: none; padding: 0; }
 .comment-list li { margin-bottom: 10px; }
 .add-comment-form textarea { width: 100%; height: 60px; margin-bottom: 5px; }
-.status-list { list-style: none; padding: 0; }
-.status-list li { margin-bottom: 5px; }
+
+.status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.status-table th,
+.status-table td {
+    border: 1px solid #333;
+    padding: 8px;
+}
+
+.status-table th {
+    background-color: #1e1e1e;
+    color: #8ab4f8;
+}
+
+.status-table td form {
+    display: inline;
+    margin-right: 5px;
+}
 

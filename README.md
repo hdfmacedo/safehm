@@ -3,6 +3,7 @@
 Sistema simples em PHP demonstrando cadastro e login.
 
 É possível criar squads/comitês através do menu lateral. Cada squad recebe uma pasta dentro de `data/squads/` onde ficam suas pautas em arquivos JSON.
+Agora também é possível remover pautas já criadas através da lista de pautas da squad.
 
 ## Como executar
 

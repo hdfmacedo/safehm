@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $squadController->addSquad($_POST['squad_name'] ?? '');
     } elseif (isset($_POST['action']) && $_POST['action'] === 'add_pauta' && isset($_SESSION['user'])) {
         $squadController->addPauta($_GET['squad'] ?? '', $_POST['pauta_name'] ?? '');
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'remove_pauta' && isset($_SESSION['user'])) {
+        $squadController->removePauta($_GET['squad'] ?? '', $_POST['pauta_file'] ?? '');
+        $pautas = $squadController->getPautas($_GET['squad'] ?? '');
     } elseif (isset($_POST['action']) && $_POST['action'] === 'save_pauta' && isset($_SESSION['user'])) {
         $squadController->savePauta(
             $_GET['squad'] ?? '',
