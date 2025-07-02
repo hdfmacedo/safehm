@@ -3,3 +3,4 @@
 /data/squads/*
 !/data/squads/.gitkeep
 data/comment_statuses.json
+data/pauta_statuses.json
